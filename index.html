@@ -1317,14 +1317,11 @@ body {
     // Huge Typography Background (HACKER HOUSE + गोवा)
     // Draw "HACKER HOUSE"
     ctx.fillStyle = 'rgba(216, 202, 0, 0.15)'; // Yellow, low opacity to act as watermark
-    ctx.font = '700 320px "Bodoni Moda", serif';
+    ctx.font = '700 280px "Bodoni Moda", serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.save();
-    ctx.scale(0.8, 1); // Condense the font slightly
-    ctx.fillText('HACKER', (W / 2) / 0.8, 480);
-    ctx.fillText('HOUSE', (W / 2) / 0.8, 760);
-    ctx.restore();
+    ctx.fillText('HACKER', W / 2, 480);
+    ctx.fillText('HOUSE', W / 2, 760);
 
     // Draw "गोवा" (Goa in Hindi/Marathi) overlapping
     ctx.fillStyle = 'rgba(255, 74, 142, 0.25)'; // Pink, slightly higher opacity
@@ -1379,9 +1376,9 @@ body {
     ctx.fill();
 
     // ---- Profile Photo Section ----
-    const photoRadius = 140;
+    const photoRadius = 180;
     const photoCX = W / 2;
-    const photoCY = 430;
+    const photoCY = 450;
 
     // Dashed neon pink outer ring
     ctx.strokeStyle = '#ff4a8e';
@@ -1424,7 +1421,7 @@ body {
     const roleBadgeW = roleMetrics.width + 48;
     const roleBadgeH = 48;
     const roleBadgeX = (W - roleBadgeW) / 2;
-    const roleBadgeY = 640;
+    const roleBadgeY = 690;
 
     // Shadow
     ctx.fillStyle = '#13140d';
@@ -1461,11 +1458,11 @@ body {
       const line1 = nameParts.slice(0, Math.ceil(nameParts.length / 2)).join(' ');
       const line2 = nameParts.slice(Math.ceil(nameParts.length / 2)).join(' ');
       const lineH = nameFontSize * 1.05;
-      const nameBaseY = 750;
+      const nameBaseY = 810;
       ctx.fillText(line1, W / 2, nameBaseY);
       ctx.fillText(line2, W / 2, nameBaseY + lineH);
     } else {
-      ctx.fillText(nameText, W / 2, 770);
+      ctx.fillText(nameText, W / 2, 830);
     }
 
     // ---- Builder Title Badge (Pink) ----
@@ -1475,7 +1472,7 @@ body {
     const titleBadgeW = titleMetrics.width + 48;
     const titleBadgeH = 44;
     const titleBadgeX = (W - titleBadgeW) / 2;
-    const titleBadgeY = nameParts.length >= 2 ? 860 : 830;
+    const titleBadgeY = nameParts.length >= 2 ? 930 : 900;
 
     // Shadow
     ctx.fillStyle = '#13140d';
@@ -1494,7 +1491,7 @@ body {
     ctx.fillText(titleText, W / 2, titleBadgeY + titleBadgeH / 2);
 
     // ---- Decorative wave separator ----
-    const waveY = Math.max(titleBadgeY + titleBadgeH + 60, 960);
+    const waveY = Math.max(titleBadgeY + titleBadgeH + 60, 1040);
     ctx.strokeStyle = 'rgba(141, 214, 163, 0.2)';
     ctx.lineWidth = 1.5;
     ctx.beginPath();
