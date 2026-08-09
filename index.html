@@ -1,0 +1,1661 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>HH GOA 2026 — Frame Your Builder Era</title>
+<meta name="description" content="Upload your photo and instantly get a branded HH Goa 2026 PFP Frame or Builder ID Card. Download and share on X with #FrameInGoa.">
+<meta property="og:title" content="HH GOA 2026 — Frame Your Builder Era">
+<meta property="og:description" content="Turn your photo into an HH Goa 2026 graphic. PFP Frame or Builder ID Card — built to be shared.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Google Fonts -->
+<link href="https://fonts.googleapis.com" rel="preconnect">
+<link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Fira+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+<!-- HEIC to JPG converter -->
+<script src="https://cdn.jsdelivr.net/npm/heic2any@0.0.4/dist/heic2any.min.js"></script>
+
+<style>
+/* ===== CSS RESET & BASE ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Jungle Tech Editorial Design Tokens */
+  --bg: #13140d;
+  --bg-dim: #0e0f08;
+  --surface: #13140d;
+  --surface-container: #1f2018;
+  --surface-container-low: #1b1c15;
+  --surface-container-high: #2a2b22;
+  --surface-container-highest: #35352d;
+  --surface-bright: #393a31;
+  --surface-variant: #35352d;
+
+  --primary: #8dd6a3;
+  --primary-container: #0d5c34;
+  --on-primary: #00391d;
+  --on-primary-container: #8ad2a0;
+
+  --secondary: #ffb1c5;
+  --secondary-container: #ff4a8e;
+  --on-secondary: #65002f;
+
+  --tertiary: #d8ca00;
+  --tertiary-fixed: #f6e60f;
+  --tertiary-container: #baae00;
+  --on-tertiary: #353100;
+
+  --on-surface: #e4e3d6;
+  --on-surface-variant: #bfc9bf;
+  --on-background: #e4e3d6;
+
+  --outline: #89938a;
+  --outline-variant: #404941;
+
+  --error: #ffb4ab;
+
+  /* Typography */
+  --font-headline: 'Bodoni Moda', serif;
+  --font-body: 'Fira Sans', sans-serif;
+  --font-code: 'JetBrains Mono', monospace;
+
+  /* Spacing */
+  --gutter: 1.5rem;
+  --margin-page: 2rem;
+  --container-max: 1280px;
+  --frame-border: 12px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--bg);
+  color: var(--on-background);
+  min-height: 100vh;
+  min-height: 100dvh;
+  overflow-x: hidden;
+  position: relative;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--secondary-container); color: var(--on-secondary); }
+
+/* ===== NOISE GRAIN OVERLAY ===== */
+.noise-overlay {
+  position: fixed; inset: 0; pointer-events: none; z-index: 9999;
+  opacity: 0.06;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+}
+
+/* ===== BACKGROUND MOTIF ===== */
+.bg-motif {
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse at 15% 20%, rgba(13, 92, 52, 0.4) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 75%, rgba(255, 74, 142, 0.08) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(216, 202, 0, 0.03) 0%, transparent 60%);
+}
+
+/* Geometric palm line decorations */
+.bg-motif::after {
+  content: '';
+  position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(141,214,163,0.015) 0px, rgba(141,214,163,0.015) 1px, transparent 1px, transparent 60px),
+    repeating-linear-gradient(-45deg, rgba(255,177,197,0.01) 0px, rgba(255,177,197,0.01) 1px, transparent 1px, transparent 80px);
+}
+
+/* ===== TOP APP BAR ===== */
+.top-bar {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0.75rem var(--gutter);
+  background: rgba(19, 20, 13, 0.85);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-bottom: 2px solid var(--primary);
+}
+.top-bar__logo {
+  font-family: var(--font-headline);
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: var(--primary);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+}
+.top-bar__accent {
+  color: var(--tertiary);
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  font-weight: 600;
+  background: var(--surface-container);
+  padding: 0.2rem 0.5rem;
+  border: 1px solid var(--outline-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+/* ===== BOTTOM NAV (Mobile) ===== */
+.bottom-nav {
+  display: none;
+  position: fixed; bottom: 0; left: 0; right: 0; z-index: 100;
+  justify-content: space-around; align-items: center;
+  padding: 0.5rem 1rem;
+  padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0));
+  background: rgba(19, 20, 13, 0.92);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border-top: 2px solid var(--primary);
+}
+@media (max-width: 768px) {
+  .bottom-nav { display: flex; }
+}
+.bottom-nav__item {
+  display: flex; flex-direction: column; align-items: center; gap: 0.15rem;
+  padding: 0.4rem 1rem;
+  color: var(--on-surface-variant);
+  text-decoration: none;
+  font-family: var(--font-code);
+  font-size: 0.65rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none; background: none;
+}
+.bottom-nav__item .material-symbols-outlined { font-size: 1.25rem; }
+.bottom-nav__item.active {
+  background: var(--secondary-container);
+  color: var(--on-secondary);
+  border-radius: 999px;
+  padding: 0.4rem 1.25rem;
+  transform: scale(1.05);
+}
+.bottom-nav__item:not(.active):hover { color: var(--primary); }
+
+/* ===== MAIN CONTENT ===== */
+.main-content {
+  position: relative; z-index: 10;
+  min-height: 100vh; min-height: 100dvh;
+  padding: 5rem var(--gutter) 6rem;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  max-width: var(--container-max);
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  .main-content { padding-bottom: 7rem; }
+}
+
+/* ===== STATE SCREENS ===== */
+.screen { display: none; width: 100%; animation: fadeSlideIn 0.5s ease-out; }
+.screen.active { display: flex; flex-direction: column; align-items: center; }
+
+@keyframes fadeSlideIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ===== LANDING STATE ===== */
+.landing { gap: 2.5rem; }
+.landing__hero { text-align: center; max-width: 640px; }
+.landing__title {
+  font-family: var(--font-headline);
+  font-size: clamp(2.5rem, 10vw, 7rem);
+  font-weight: 900;
+  line-height: 0.85;
+  letter-spacing: -0.05em;
+  color: var(--tertiary);
+  text-transform: uppercase;
+  text-shadow: 4px 4px 0 rgba(0,0,0,0.8);
+  margin-bottom: 1rem;
+}
+.landing__subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(0.95rem, 2.5vw, 1.125rem);
+  color: var(--on-surface-variant);
+  line-height: 1.6;
+  max-width: 480px;
+  margin: 0 auto;
+}
+
+/* Format Toggle */
+.format-toggle {
+  display: flex;
+  background: var(--surface-container-low);
+  border: 2px solid var(--outline-variant);
+  padding: 4px;
+  width: fit-content;
+}
+.format-toggle__btn {
+  padding: 0.75rem 1.5rem;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+  background: transparent;
+  color: var(--on-surface);
+}
+.format-toggle__btn.active {
+  background: var(--secondary-container);
+  color: var(--on-secondary);
+  border-color: transparent;
+}
+.format-toggle__btn:not(.active):hover {
+  color: var(--primary);
+  border-color: var(--outline-variant);
+}
+
+/* Upload Area */
+.upload-zone {
+  width: 100%;
+  max-width: 560px;
+  background: var(--surface-bright);
+  border: 1px solid var(--primary);
+  padding: 1.5rem;
+  box-shadow: 8px 8px 0 rgba(141, 214, 163, 0.15);
+  transition: all 0.3s;
+}
+.upload-zone:hover { box-shadow: 12px 12px 0 rgba(141, 214, 163, 0.2); }
+
+.upload-zone__inner {
+  border: 2px dashed var(--secondary-container);
+  padding: 3rem 2rem;
+  min-height: 320px;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+.upload-zone__inner:hover,
+.upload-zone__inner.drag-over {
+  background: rgba(255, 74, 142, 0.04);
+  border-color: var(--secondary);
+}
+.upload-zone__inner.drag-over {
+  background: rgba(255, 74, 142, 0.08);
+  border-style: solid;
+}
+
+.upload-zone__icon {
+  font-size: 3.5rem;
+  color: var(--secondary-container);
+  margin-bottom: 1.5rem;
+  transition: transform 0.3s;
+}
+.upload-zone__inner:hover .upload-zone__icon { transform: translateY(-6px); }
+
+.upload-zone__title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.25rem, 4vw, 1.75rem);
+  font-weight: 700;
+  color: var(--on-background);
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s;
+}
+.upload-zone__inner:hover .upload-zone__title { color: var(--secondary); }
+
+.upload-zone__hint {
+  font-size: 1rem;
+  color: var(--on-surface-variant);
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+.upload-zone__formats {
+  display: flex; gap: 0.75rem; align-items: center;
+  background: var(--surface-container);
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--outline-variant);
+}
+.upload-zone__format-tag {
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+.upload-zone__format-dot { color: var(--primary); }
+
+/* Corner markers */
+.corner-marker {
+  position: absolute; width: 16px; height: 16px;
+}
+.corner-marker--tl { top: 8px; left: 8px; border-top: 2px solid var(--secondary-container); border-left: 2px solid var(--secondary-container); }
+.corner-marker--tr { top: 8px; right: 8px; border-top: 2px solid var(--secondary-container); border-right: 2px solid var(--secondary-container); }
+.corner-marker--bl { bottom: 8px; left: 8px; border-bottom: 2px solid var(--secondary-container); border-left: 2px solid var(--secondary-container); }
+.corner-marker--br { bottom: 8px; right: 8px; border-bottom: 2px solid var(--secondary-container); border-right: 2px solid var(--secondary-container); }
+
+/* ===== FORM STATE (Builder ID) ===== */
+.form-screen { gap: 2rem; max-width: 480px; width: 100%; }
+
+.form-screen__header {
+  text-align: center;
+}
+.form-screen__title {
+  font-family: var(--font-headline);
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
+  color: var(--tertiary);
+  text-transform: uppercase;
+  letter-spacing: -0.03em;
+  margin-bottom: 0.5rem;
+}
+.form-screen__subtitle {
+  color: var(--on-surface-variant);
+  font-size: 0.95rem;
+}
+
+/* Photo preview in form */
+.form-photo-preview {
+  width: 120px; height: 120px;
+  border-radius: 50%;
+  border: 3px solid var(--primary);
+  overflow: hidden;
+  margin: 0 auto;
+  box-shadow: 0 0 0 6px rgba(141,214,163,0.15);
+}
+.form-photo-preview img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+}
+
+.form-group {
+  display: flex; flex-direction: column; gap: 0.5rem;
+  width: 100%;
+}
+.form-label {
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--secondary);
+}
+.form-input {
+  background: var(--surface-container);
+  border: 2px solid var(--outline-variant);
+  padding: 0.875rem 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--on-surface);
+  transition: all 0.2s;
+  outline: none;
+  width: 100%;
+}
+.form-input::placeholder { color: var(--outline); }
+.form-input:focus {
+  border-color: var(--tertiary);
+  box-shadow: 0 0 0 3px rgba(216, 202, 0, 0.15);
+}
+
+.form-select {
+  background: var(--surface-container);
+  border: 2px solid var(--outline-variant);
+  padding: 0.875rem 1rem;
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--on-surface);
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%238dd6a3' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1rem center;
+}
+.form-select:focus {
+  border-color: var(--tertiary);
+  box-shadow: 0 0 0 3px rgba(216, 202, 0, 0.15);
+}
+
+/* Builder title display */
+.builder-title-display {
+  background: var(--secondary-container);
+  color: var(--on-secondary);
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.6rem 1.25rem;
+  text-align: center;
+  box-shadow: 4px 4px 0 var(--bg);
+  border: 2px solid var(--bg);
+}
+
+/* ===== BUTTONS ===== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 1rem 2rem;
+  border: 2px solid var(--bg);
+  cursor: pointer;
+  transition: all 0.15s;
+  box-shadow: 4px 4px 0 var(--bg);
+  text-decoration: none;
+}
+.btn:hover {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--bg);
+}
+.btn:active {
+  transform: translate(4px, 4px);
+  box-shadow: 0 0 0 var(--bg);
+}
+.btn .material-symbols-outlined { font-size: 1.15rem; }
+
+.btn--primary {
+  background: var(--secondary-container);
+  color: var(--bg);
+}
+.btn--secondary {
+  background: var(--tertiary);
+  color: var(--bg);
+}
+.btn--ghost {
+  background: transparent;
+  color: var(--on-surface);
+  border: 2px solid var(--tertiary);
+  box-shadow: none;
+}
+.btn--ghost:hover { background: rgba(216, 202, 0, 0.08); transform: none; box-shadow: none; }
+
+.btn--full { width: 100%; }
+
+.btn-row {
+  display: flex; gap: 1rem; width: 100%; max-width: 480px;
+  flex-wrap: wrap;
+}
+.btn-row .btn { flex: 1; min-width: 180px; }
+
+/* ===== GENERATION SCREEN ===== */
+.gen-screen {
+  gap: 2rem;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.gen-visual {
+  position: relative;
+  width: 240px; height: 240px;
+}
+
+/* Central circle with user photo */
+.gen-visual__photo {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px; height: 100px;
+  border-radius: 50%;
+  border: 4px solid var(--on-surface);
+  overflow: hidden;
+  z-index: 10;
+  box-shadow: 0 0 40px rgba(141, 214, 163, 0.3);
+}
+.gen-visual__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+/* Animated elements */
+.gen-ring {
+  position: absolute; inset: 0;
+  border: 2px dashed var(--tertiary);
+  border-radius: 50%;
+  animation: genSpin 8s linear infinite;
+  opacity: 0.6;
+}
+.gen-ring--2 {
+  inset: -20px;
+  border-color: var(--secondary-container);
+  animation-duration: 12s;
+  animation-direction: reverse;
+  opacity: 0.4;
+}
+.gen-ring--3 {
+  inset: -40px;
+  border-color: var(--primary);
+  border-style: dotted;
+  animation-duration: 20s;
+  opacity: 0.3;
+}
+@keyframes genSpin { to { transform: rotate(360deg); } }
+
+/* Kinetic text elements */
+.gen-kinetic {
+  position: absolute;
+  font-family: var(--font-headline);
+  font-weight: 900;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  pointer-events: none;
+  animation: genFlash 0.4s ease-in-out infinite alternate;
+}
+.gen-kinetic--1 { top: -10px; left: -30px; color: var(--tertiary); animation-delay: 0.1s; }
+.gen-kinetic--2 { bottom: 10px; right: -40px; color: var(--secondary-container); animation-delay: 0.5s; }
+.gen-kinetic--3 { bottom: -20px; left: 10px; color: var(--primary); animation-delay: 0.9s; }
+@keyframes genFlash { from { opacity: 0; } to { opacity: 1; } }
+
+.gen-screen__title {
+  font-family: var(--font-code);
+  font-size: clamp(0.85rem, 3vw, 1.15rem);
+  font-weight: 700;
+  color: var(--tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: center;
+}
+
+/* Progress bar */
+.gen-progress {
+  width: 100%; max-width: 360px;
+  height: 4px;
+  background: rgba(0,0,0,0.3);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.1);
+}
+.gen-progress__bar {
+  height: 100%;
+  background: linear-gradient(90deg, var(--secondary-container), var(--tertiary));
+  border-radius: 999px;
+  width: 0%;
+  animation: genProgress 2s ease-out forwards;
+}
+@keyframes genProgress {
+  0% { width: 0%; }
+  60% { width: 75%; }
+  100% { width: 100%; }
+}
+
+.gen-screen__sub {
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  color: var(--on-surface-variant);
+  text-transform: uppercase;
+  letter-spacing: 0.15em;
+  opacity: 0.7;
+}
+
+/* ===== RESULT SCREEN ===== */
+.result-screen { gap: 2rem; }
+
+.result-header {
+  display: flex; justify-content: space-between; align-items: center;
+  width: 100%; max-width: 480px;
+}
+.result-back {
+  display: flex; align-items: center; gap: 0.4rem;
+  color: var(--on-surface);
+  font-family: var(--font-code);
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  background: none; border: none;
+  transition: color 0.2s;
+}
+.result-back:hover { color: var(--tertiary); }
+.result-back:hover .material-symbols-outlined { transform: translateX(-3px); }
+.result-back .material-symbols-outlined { font-size: 1.1rem; transition: transform 0.2s; }
+
+.result-badge {
+  font-family: var(--font-code);
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: var(--surface-container-highest);
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--tertiary);
+  display: flex; align-items: center; gap: 0.4rem;
+}
+.result-badge__dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--tertiary);
+  animation: pulse 2s infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+
+/* Canvas preview */
+.result-preview {
+  width: 100%;
+  max-width: 420px;
+  border: 4px solid var(--bg-dim);
+  box-shadow: 8px 8px 0 rgba(0,0,0,0.5);
+  background: var(--surface-container);
+  overflow: hidden;
+}
+.result-preview canvas {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ===== HIDDEN FILE INPUT ===== */
+#fileInput { display: none; }
+
+/* ===== UTILITY ===== */
+.text-center { text-align: center; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.gap-1 { gap: 0.5rem; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 480px) {
+  .landing__title { font-size: 2.75rem; }
+  .upload-zone { padding: 1rem; box-shadow: 5px 5px 0 rgba(141,214,163,0.12); }
+  .upload-zone__inner { padding: 2rem 1rem; min-height: 260px; }
+  .btn-row { flex-direction: column; }
+  .btn-row .btn { min-width: auto; }
+  .result-preview { max-width: 100%; }
+  .format-toggle__btn { padding: 0.6rem 1rem; font-size: 0.7rem; }
+}
+
+/* ===== LOADING SHIMMER ===== */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(141,214,163,0.08) 50%, transparent 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Error toast */
+.toast {
+  position: fixed;
+  top: 5rem; left: 50%;
+  transform: translateX(-50%);
+  background: var(--surface-container-high);
+  color: var(--error);
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--error);
+  z-index: 200;
+  display: none;
+  animation: fadeSlideIn 0.3s ease-out;
+}
+.toast.show { display: block; }
+</style>
+</head>
+<body>
+
+<!-- Background layers -->
+<div class="bg-motif"></div>
+<div class="noise-overlay"></div>
+
+<!-- Top App Bar -->
+<header class="top-bar">
+  <div class="top-bar__logo">HH GOA 2026</div>
+  <div class="top-bar__accent">Frame Builder</div>
+</header>
+
+<!-- Error Toast -->
+<div class="toast" id="toast"></div>
+
+<!-- Hidden file input -->
+<input type="file" id="fileInput" accept="image/jpeg,image/png,image/heic,image/heif,.heic,.heif,.jpg,.jpeg,.png">
+
+<!-- Main Content -->
+<main class="main-content">
+
+  <!-- ===== SCREEN 1: LANDING & UPLOAD ===== -->
+  <section class="screen landing active" id="screenLanding">
+    <div class="landing__hero">
+      <h1 class="landing__title">Frame Your<br>Builder Era</h1>
+      <p class="landing__subtitle">Turn your photo into an HH Goa 2026 graphic built to be shared. Select a format, drop your file, and generate your proof of work.</p>
+    </div>
+
+    <div class="format-toggle" id="formatToggle">
+      <button class="format-toggle__btn active" data-format="pfp" id="btnPfp">PFP Frame</button>
+      <button class="format-toggle__btn" data-format="id" id="btnId">Builder ID</button>
+    </div>
+
+    <div class="upload-zone" id="uploadZone">
+      <div class="upload-zone__inner" id="uploadInner">
+        <span class="material-symbols-outlined upload-zone__icon" style="font-variation-settings: 'FILL' 1;">upload_file</span>
+        <h2 class="upload-zone__title">Upload Your Photo</h2>
+        <p class="upload-zone__hint">Drag and drop or tap to browse</p>
+        <div class="upload-zone__formats">
+          <span class="upload-zone__format-tag">JPG</span>
+          <span class="upload-zone__format-dot">·</span>
+          <span class="upload-zone__format-tag">PNG</span>
+          <span class="upload-zone__format-dot">·</span>
+          <span class="upload-zone__format-tag">HEIC</span>
+        </div>
+        <div class="corner-marker corner-marker--tl"></div>
+        <div class="corner-marker corner-marker--tr"></div>
+        <div class="corner-marker corner-marker--bl"></div>
+        <div class="corner-marker corner-marker--br"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN 2: FORM (Builder ID only) ===== -->
+  <section class="screen form-screen" id="screenForm">
+    <div class="form-screen__header">
+      <h2 class="form-screen__title">Your Builder ID</h2>
+      <p class="form-screen__subtitle">Fill in your details for the card</p>
+    </div>
+
+    <div class="form-photo-preview" id="formPhotoPreview">
+      <img id="formPhotoImg" src="" alt="Your photo">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="inputName">Your Name</label>
+      <input class="form-input" id="inputName" type="text" placeholder="e.g. Koushik Varma" maxlength="30" autocomplete="name">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="inputRole">Stack / Role</label>
+      <input class="form-input" id="inputRole" type="text" placeholder="e.g. AI Engineer, Full Stack Dev" maxlength="30">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label">Your Builder Title</label>
+      <div class="builder-title-display" id="builderTitleDisplay">The Agent Architect</div>
+      <button class="btn btn--ghost btn--full mt-1" id="btnRerollTitle" style="padding: 0.6rem;">
+        <span class="material-symbols-outlined" style="font-size:1rem;">casino</span>
+        Reroll Title
+      </button>
+    </div>
+
+    <div class="btn-row" style="margin-top: 0.5rem;">
+      <button class="btn btn--ghost" id="btnFormBack">
+        <span class="material-symbols-outlined">arrow_back</span>
+        Back
+      </button>
+      <button class="btn btn--primary" id="btnGenerate">
+        <span class="material-symbols-outlined">auto_awesome</span>
+        Generate
+      </button>
+    </div>
+  </section>
+
+  <!-- ===== SCREEN 3: GENERATION ANIMATION ===== -->
+  <section class="screen gen-screen" id="screenGen">
+    <div class="gen-visual">
+      <div class="gen-ring"></div>
+      <div class="gen-ring gen-ring--2"></div>
+      <div class="gen-ring gen-ring--3"></div>
+      <div class="gen-visual__photo" id="genPhoto">
+        <img id="genPhotoImg" src="" alt="">
+      </div>
+      <span class="gen-kinetic gen-kinetic--1">BUILD</span>
+      <span class="gen-kinetic gen-kinetic--2">CREATE</span>
+      <span class="gen-kinetic gen-kinetic--3">SHIP</span>
+    </div>
+
+    <h2 class="gen-screen__title" id="genTitle">Composing Your Builder Frame...</h2>
+
+    <div class="gen-progress">
+      <div class="gen-progress__bar" id="genProgressBar"></div>
+    </div>
+
+    <p class="gen-screen__sub">Assembling Identity Graphics</p>
+  </section>
+
+  <!-- ===== SCREEN 4: RESULT ===== -->
+  <section class="screen result-screen" id="screenResult">
+    <div class="result-header">
+      <button class="result-back" id="btnStartOver">
+        <span class="material-symbols-outlined">arrow_back</span>
+        <span>Start Over</span>
+      </button>
+      <div class="result-badge">
+        <div class="result-badge__dot"></div>
+        <span>Ready</span>
+      </div>
+    </div>
+
+    <div class="result-preview" id="resultPreview">
+      <canvas id="resultCanvas"></canvas>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn btn--primary" id="btnDownload">
+        <span class="material-symbols-outlined">download</span>
+        Save Image
+      </button>
+      <button class="btn btn--secondary" id="btnShare">
+        <span class="material-symbols-outlined">share</span>
+        Share to X
+      </button>
+    </div>
+  </section>
+
+</main>
+
+<!-- Bottom Nav (Mobile) -->
+<nav class="bottom-nav" id="bottomNav">
+  <button class="bottom-nav__item active" data-format="pfp" id="navPfp">
+    <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">filter_frames</span>
+    <span>Frame</span>
+  </button>
+  <button class="bottom-nav__item" data-format="id" id="navId">
+    <span class="material-symbols-outlined">badge</span>
+    <span>ID Card</span>
+  </button>
+  <button class="bottom-nav__item" id="navShare" style="display:none;">
+    <span class="material-symbols-outlined">ios_share</span>
+    <span>Share</span>
+  </button>
+</nav>
+
+<script>
+// ===================================================================
+// HH GOA 2026 — FRAME BUILDER APPLICATION
+// ===================================================================
+
+(function() {
+  'use strict';
+
+  // ----- State -----
+  const state = {
+    format: 'pfp',       // 'pfp' | 'id'
+    screen: 'landing',   // 'landing' | 'form' | 'gen' | 'result'
+    photoFile: null,      // original File
+    photoBlob: null,      // processed blob (after HEIC convert if needed)
+    photoImg: null,       // loaded HTMLImageElement
+    name: '',
+    role: '',
+    builderTitle: '',
+    generatedBlob: null,  // final PNG blob for download
+  };
+
+  // ----- Builder Titles -----
+  const BUILDER_TITLES = [
+    'The Agent Architect',
+    'The Code Alchemist',
+    'The Pixel Wrangler',
+    'The Stack Surgeon',
+    'The Data Nomad',
+    'The Ship Captain',
+    'The Debug Whisperer',
+    'The API Artisan',
+    'The Neural Navigator',
+    'The Cloud Conjurer',
+    'The Logic Lyricist',
+    'The Binary Bard',
+    'The Protocol Punk',
+    'The Schema Sculptor',
+    'The Vector Voyager',
+    'The Deploy Demon',
+    'The Kernel Keeper',
+    'The Runtime Rebel',
+    'The Tensor Tamer',
+    'The Mesh Maverick',
+    'The Prompt Prophet',
+    'The Cipher Sage',
+    'The Graph Guardian',
+    'The Latency Slayer',
+    'The Infra Illusionist',
+    'The Pipeline Poet',
+    'The Zero-Day Zen',
+    'The Fork Forger',
+    'The Cache Commander',
+    'The Recursion Ronin',
+  ];
+
+  function randomTitle() {
+    return BUILDER_TITLES[Math.floor(Math.random() * BUILDER_TITLES.length)];
+  }
+
+  // ----- DOM Elements -----
+  const $ = (s) => document.querySelector(s);
+  const $$ = (s) => document.querySelectorAll(s);
+
+  const screens = {
+    landing: $('#screenLanding'),
+    form: $('#screenForm'),
+    gen: $('#screenGen'),
+    result: $('#screenResult'),
+  };
+
+  const fileInput = $('#fileInput');
+  const canvas = $('#resultCanvas');
+  const ctx = canvas.getContext('2d');
+
+  // ----- Screen Navigation -----
+  function showScreen(name) {
+    state.screen = name;
+    Object.values(screens).forEach(s => s.classList.remove('active'));
+    screens[name].classList.add('active');
+
+    // Update bottom nav share visibility
+    const navShare = $('#navShare');
+    if (name === 'result') {
+      navShare.style.display = '';
+    } else {
+      navShare.style.display = 'none';
+    }
+
+    // Reset generation progress on re-entry
+    if (name === 'gen') {
+      const bar = $('#genProgressBar');
+      bar.style.animation = 'none';
+      bar.offsetHeight; // trigger reflow
+      bar.style.animation = '';
+    }
+  }
+
+  // ----- Format Toggle -----
+  function setFormat(fmt) {
+    state.format = fmt;
+    // Update toggle buttons
+    $$('.format-toggle__btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.format === fmt);
+    });
+    // Update bottom nav
+    $$('.bottom-nav__item[data-format]').forEach(b => {
+      b.classList.toggle('active', b.dataset.format === fmt);
+    });
+  }
+
+  $('#btnPfp').addEventListener('click', () => setFormat('pfp'));
+  $('#btnId').addEventListener('click', () => setFormat('id'));
+  $('#navPfp').addEventListener('click', () => { setFormat('pfp'); if (state.screen === 'landing') return; showScreen('landing'); });
+  $('#navId').addEventListener('click', () => { setFormat('id'); if (state.screen === 'landing') return; showScreen('landing'); });
+
+  // ----- Toast -----
+  let toastTimeout;
+  function showToast(msg) {
+    const t = $('#toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    clearTimeout(toastTimeout);
+    toastTimeout = setTimeout(() => t.classList.remove('show'), 4000);
+  }
+
+  // ----- File Upload -----
+  const uploadZone = $('#uploadZone');
+  const uploadInner = $('#uploadInner');
+
+  uploadInner.addEventListener('click', () => fileInput.click());
+
+  // Drag and drop
+  ['dragenter', 'dragover'].forEach(evt => {
+    uploadInner.addEventListener(evt, (e) => {
+      e.preventDefault(); e.stopPropagation();
+      uploadInner.classList.add('drag-over');
+    });
+  });
+  ['dragleave', 'drop'].forEach(evt => {
+    uploadInner.addEventListener(evt, (e) => {
+      e.preventDefault(); e.stopPropagation();
+      uploadInner.classList.remove('drag-over');
+    });
+  });
+  uploadInner.addEventListener('drop', (e) => {
+    const files = e.dataTransfer.files;
+    if (files.length > 0) handleFile(files[0]);
+  });
+
+  fileInput.addEventListener('change', (e) => {
+    if (e.target.files.length > 0) handleFile(e.target.files[0]);
+  });
+
+  async function handleFile(file) {
+    // Validate type
+    const validTypes = ['image/jpeg', 'image/png', 'image/heic', 'image/heif'];
+    const ext = file.name.toLowerCase().split('.').pop();
+    const validExts = ['jpg', 'jpeg', 'png', 'heic', 'heif'];
+
+    if (!validTypes.includes(file.type) && !validExts.includes(ext)) {
+      showToast('Please upload a JPG, PNG, or HEIC image.');
+      return;
+    }
+
+    // Validate size (max 20MB)
+    if (file.size > 20 * 1024 * 1024) {
+      showToast('Image too large. Please use a photo under 20MB.');
+      return;
+    }
+
+    state.photoFile = file;
+
+    try {
+      // Convert HEIC if needed
+      if (file.type === 'image/heic' || file.type === 'image/heif' || ext === 'heic' || ext === 'heif') {
+        if (typeof heic2any === 'undefined') {
+          showToast('HEIC conversion library not loaded. Please try a JPG/PNG.');
+          return;
+        }
+        const blob = await heic2any({ blob: file, toType: 'image/jpeg', quality: 0.92 });
+        state.photoBlob = Array.isArray(blob) ? blob[0] : blob;
+      } else {
+        state.photoBlob = file;
+      }
+
+      // Load image
+      const img = new Image();
+      img.crossOrigin = 'anonymous';
+      const url = URL.createObjectURL(state.photoBlob);
+      await new Promise((resolve, reject) => {
+        img.onload = resolve;
+        img.onerror = () => reject(new Error('Failed to load image'));
+        img.src = url;
+      });
+      state.photoImg = img;
+
+      // Proceed based on format
+      if (state.format === 'id') {
+        // Show form
+        state.builderTitle = randomTitle();
+        $('#builderTitleDisplay').textContent = state.builderTitle;
+        $('#formPhotoImg').src = url;
+        showScreen('form');
+      } else {
+        // PFP: go straight to generation
+        startGeneration();
+      }
+
+    } catch (err) {
+      console.error(err);
+      showToast('Failed to process image. Try another photo.');
+    }
+  }
+
+  // ----- Form Interactions -----
+  $('#btnRerollTitle').addEventListener('click', () => {
+    let newTitle;
+    do { newTitle = randomTitle(); } while (newTitle === state.builderTitle && BUILDER_TITLES.length > 1);
+    state.builderTitle = newTitle;
+    $('#builderTitleDisplay').textContent = newTitle;
+  });
+
+  $('#btnFormBack').addEventListener('click', () => showScreen('landing'));
+
+  $('#btnGenerate').addEventListener('click', () => {
+    state.name = $('#inputName').value.trim();
+    state.role = $('#inputRole').value.trim();
+
+    if (!state.name) {
+      showToast('Please enter your name.');
+      $('#inputName').focus();
+      return;
+    }
+    if (!state.role) {
+      showToast('Please enter your stack or role.');
+      $('#inputRole').focus();
+      return;
+    }
+
+    startGeneration();
+  });
+
+  // ----- Generation -----
+  function startGeneration() {
+    // Set generation photo preview
+    $('#genPhotoImg').src = URL.createObjectURL(state.photoBlob);
+    $('#genTitle').textContent = state.format === 'pfp'
+      ? 'Composing Your PFP Frame...'
+      : 'Composing Your Builder ID...';
+
+    showScreen('gen');
+
+    // Small delay for animation, then render
+    setTimeout(() => {
+      if (state.format === 'pfp') {
+        renderPfpFrame();
+      } else {
+        renderBuilderId();
+      }
+      // Transition to result after progress animation
+      setTimeout(() => showScreen('result'), 600);
+    }, 1800);
+  }
+
+  // ----- Canvas: PFP Frame (1080×1080) -----
+  function renderPfpFrame() {
+    const W = 1080, H = 1080;
+    canvas.width = W;
+    canvas.height = H;
+
+    const img = state.photoImg;
+
+    // Background
+    ctx.fillStyle = '#13140d';
+    ctx.fillRect(0, 0, W, H);
+
+    // Draw center-cropped photo
+    const padding = 48;
+    const photoSize = W - padding * 2;
+    drawCenterCrop(img, padding, padding, photoSize, photoSize);
+
+    // Outer frame - thick branded border
+    const borderW = 48;
+
+    // Top border
+    ctx.fillStyle = '#0d5c34';
+    ctx.fillRect(0, 0, W, borderW);
+    // Bottom border
+    ctx.fillRect(0, H - borderW * 2.2, W, borderW * 2.2);
+    // Left border
+    ctx.fillRect(0, 0, borderW, H);
+    // Right border
+    ctx.fillRect(W - borderW, 0, borderW, H);
+
+    // Inner accent line (neon pink)
+    ctx.strokeStyle = '#ff4a8e';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(borderW - 1, borderW - 1, W - (borderW - 1) * 2, H - borderW - (borderW * 2.2) + 2);
+
+    // Corner decorative squares
+    const cornerSize = 14;
+    ctx.fillStyle = '#d8ca00';
+    // TL
+    ctx.fillRect(borderW - cornerSize / 2, borderW - cornerSize / 2, cornerSize, cornerSize);
+    // TR
+    ctx.fillRect(W - borderW - cornerSize / 2, borderW - cornerSize / 2, cornerSize, cornerSize);
+    // BL
+    ctx.fillRect(borderW - cornerSize / 2, H - borderW * 2.2 - cornerSize / 2, cornerSize, cornerSize);
+    // BR
+    ctx.fillRect(W - borderW - cornerSize / 2, H - borderW * 2.2 - cornerSize / 2, cornerSize, cornerSize);
+
+    // Diagonal decorative lines
+    ctx.strokeStyle = 'rgba(141, 214, 163, 0.25)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < 6; i++) {
+      ctx.beginPath();
+      ctx.moveTo(borderW + 8 + i * 12, borderW + 4);
+      ctx.lineTo(borderW + 4, borderW + 8 + i * 12);
+      ctx.stroke();
+    }
+    for (let i = 0; i < 6; i++) {
+      ctx.beginPath();
+      ctx.moveTo(W - borderW - 8 - i * 12, borderW + 4);
+      ctx.lineTo(W - borderW - 4, borderW + 8 + i * 12);
+      ctx.stroke();
+    }
+
+    // Bottom panel - "HH GOA 2026" text
+    const bottomY = H - borderW * 2.2;
+
+    // Grain effect on bottom
+    ctx.fillStyle = 'rgba(13, 92, 52, 0.85)';
+    ctx.fillRect(0, bottomY, W, borderW * 2.2);
+
+    // Thin line separator
+    ctx.strokeStyle = '#ff4a8e';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(borderW, bottomY + 1);
+    ctx.lineTo(W - borderW, bottomY + 1);
+    ctx.stroke();
+
+    // HH GOA text
+    ctx.fillStyle = '#d8ca00';
+    ctx.font = '900 58px "Bodoni Moda", serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('HH GOA', borderW + 12, bottomY + borderW * 1.1 - 8);
+
+    // 2026 text
+    ctx.fillStyle = '#8dd6a3';
+    ctx.font = '700 32px "JetBrains Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('2026', W - borderW - 12, bottomY + borderW * 1.1 - 16);
+
+    // #FrameInGoa
+    ctx.fillStyle = '#ffb1c5';
+    ctx.font = '500 18px "JetBrains Mono", monospace';
+    ctx.textAlign = 'right';
+    ctx.fillText('#FrameInGoa', W - borderW - 12, bottomY + borderW * 1.1 + 16);
+
+    // Wave decoration on top border
+    ctx.strokeStyle = 'rgba(216, 202, 0, 0.4)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let x = borderW; x < W - borderW; x += 4) {
+      const y = borderW / 2 + Math.sin(x * 0.05) * 6;
+      if (x === borderW) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // Noise grain overlay
+    addNoiseGrain(W, H, 0.03);
+
+    // Save as blob
+    canvas.toBlob((blob) => {
+      state.generatedBlob = blob;
+    }, 'image/png');
+  }
+
+  // ----- Canvas: Builder ID Card (1200×1500) -----
+  function renderBuilderId() {
+    const W = 1200, H = 1500;
+    canvas.width = W;
+    canvas.height = H;
+
+    const img = state.photoImg;
+
+    // ---- Background ----
+    ctx.fillStyle = '#1f2018';
+    ctx.fillRect(0, 0, W, H);
+
+    // Geometric pattern overlay
+    ctx.strokeStyle = 'rgba(141, 214, 163, 0.04)';
+    ctx.lineWidth = 1;
+    for (let i = 0; i < W; i += 80) {
+      for (let j = 0; j < H; j += 140) {
+        // Diamond pattern
+        ctx.beginPath();
+        ctx.moveTo(i + 40, j);
+        ctx.lineTo(i + 80, j + 70);
+        ctx.lineTo(i + 40, j + 140);
+        ctx.lineTo(i, j + 70);
+        ctx.closePath();
+        ctx.stroke();
+      }
+    }
+
+    // Radial gradient overlay
+    const grd = ctx.createRadialGradient(W / 2, H * 0.35, 0, W / 2, H * 0.35, W * 0.7);
+    grd.addColorStop(0, 'rgba(13, 92, 52, 0.15)');
+    grd.addColorStop(0.5, 'rgba(13, 92, 52, 0.05)');
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, W, H);
+
+    // ---- Inner frame (12px) ----
+    const frame = 24;
+    ctx.strokeStyle = '#404941';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(frame, frame, W - frame * 2, H - frame * 2);
+
+    // ---- Top Header ----
+    // HH GOA title
+    ctx.fillStyle = '#8dd6a3';
+    ctx.font = '700 72px "Bodoni Moda", serif';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillText('HH GOA', frame + 36, frame + 36);
+
+    // 2026 EVENT ID badge
+    ctx.fillStyle = '#13140d';
+    ctx.fillRect(frame + 36, frame + 120, 220, 36);
+    ctx.strokeStyle = '#404941';
+    ctx.lineWidth = 1;
+    ctx.strokeRect(frame + 36, frame + 120, 220, 36);
+    ctx.fillStyle = '#e4e3d6';
+    ctx.font = '500 16px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('2026 EVENT ID', frame + 52, frame + 138);
+
+    // Fire icon (drawn as stylized flame)
+    const fireX = W - frame - 80;
+    const fireY = frame + 52;
+    ctx.fillStyle = '#ff4a8e';
+    ctx.beginPath();
+    ctx.moveTo(fireX, fireY + 40);
+    ctx.quadraticCurveTo(fireX - 20, fireY + 15, fireX, fireY - 10);
+    ctx.quadraticCurveTo(fireX + 5, fireY + 10, fireX + 12, fireY - 5);
+    ctx.quadraticCurveTo(fireX + 25, fireY + 20, fireX, fireY + 40);
+    ctx.fill();
+    // Inner flame
+    ctx.fillStyle = '#d8ca00';
+    ctx.beginPath();
+    ctx.moveTo(fireX, fireY + 38);
+    ctx.quadraticCurveTo(fireX - 8, fireY + 25, fireX, fireY + 12);
+    ctx.quadraticCurveTo(fireX + 8, fireY + 25, fireX, fireY + 38);
+    ctx.fill();
+
+    // ---- Profile Photo Section ----
+    const photoRadius = 140;
+    const photoCX = W / 2;
+    const photoCY = 430;
+
+    // Dashed neon pink outer ring
+    ctx.strokeStyle = '#ff4a8e';
+    ctx.lineWidth = 2.5;
+    ctx.setLineDash([8, 6]);
+    ctx.beginPath();
+    ctx.arc(photoCX, photoCY, photoRadius + 16, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Solid primary border
+    ctx.strokeStyle = '#8dd6a3';
+    ctx.lineWidth = 5;
+    ctx.beginPath();
+    ctx.arc(photoCX, photoCY, photoRadius + 3, 0, Math.PI * 2);
+    ctx.stroke();
+
+    // Clip and draw circular photo
+    ctx.save();
+    ctx.beginPath();
+    ctx.arc(photoCX, photoCY, photoRadius, 0, Math.PI * 2);
+    ctx.clip();
+
+    // Background for photo area
+    ctx.fillStyle = '#13140d';
+    ctx.fillRect(photoCX - photoRadius, photoCY - photoRadius, photoRadius * 2, photoRadius * 2);
+
+    // Draw photo center-cropped into circle
+    const srcSize = Math.min(img.naturalWidth, img.naturalHeight);
+    const sx = (img.naturalWidth - srcSize) / 2;
+    const sy = (img.naturalHeight - srcSize) / 2;
+    ctx.drawImage(img, sx, sy, srcSize, srcSize,
+      photoCX - photoRadius, photoCY - photoRadius, photoRadius * 2, photoRadius * 2);
+    ctx.restore();
+
+    // ---- Role Badge (Yellow) ----
+    const roleText = (state.role || 'Builder').toUpperCase();
+    ctx.font = '700 22px "JetBrains Mono", monospace';
+    const roleMetrics = ctx.measureText(roleText);
+    const roleBadgeW = roleMetrics.width + 48;
+    const roleBadgeH = 48;
+    const roleBadgeX = (W - roleBadgeW) / 2;
+    const roleBadgeY = 640;
+
+    // Shadow
+    ctx.fillStyle = '#13140d';
+    ctx.fillRect(roleBadgeX + 4, roleBadgeY + 4, roleBadgeW, roleBadgeH);
+    // Badge
+    ctx.fillStyle = '#f6e60f';
+    ctx.fillRect(roleBadgeX, roleBadgeY, roleBadgeW, roleBadgeH);
+    ctx.strokeStyle = '#13140d';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(roleBadgeX, roleBadgeY, roleBadgeW, roleBadgeH);
+    // Text
+    ctx.fillStyle = '#13140d';
+    ctx.font = '700 20px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(roleText, W / 2, roleBadgeY + roleBadgeH / 2);
+
+    // ---- Name (Big Headline) ----
+    const nameText = (state.name || 'Builder').toUpperCase();
+    const nameParts = nameText.split(' ');
+    ctx.fillStyle = '#e4e3d6';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    // Dynamic font size based on name length
+    let nameFontSize = 80;
+    if (nameText.length > 16) nameFontSize = 60;
+    if (nameText.length > 24) nameFontSize = 48;
+
+    ctx.font = `700 ${nameFontSize}px "Bodoni Moda", serif`;
+
+    if (nameParts.length >= 2) {
+      // Split into two lines
+      const line1 = nameParts.slice(0, Math.ceil(nameParts.length / 2)).join(' ');
+      const line2 = nameParts.slice(Math.ceil(nameParts.length / 2)).join(' ');
+      const lineH = nameFontSize * 1.05;
+      const nameBaseY = 750;
+      ctx.fillText(line1, W / 2, nameBaseY);
+      ctx.fillText(line2, W / 2, nameBaseY + lineH);
+    } else {
+      ctx.fillText(nameText, W / 2, 770);
+    }
+
+    // ---- Builder Title Badge (Pink) ----
+    const titleText = (state.builderTitle || 'The Builder').toUpperCase();
+    ctx.font = '700 20px "JetBrains Mono", monospace';
+    const titleMetrics = ctx.measureText(titleText);
+    const titleBadgeW = titleMetrics.width + 48;
+    const titleBadgeH = 44;
+    const titleBadgeX = (W - titleBadgeW) / 2;
+    const titleBadgeY = nameParts.length >= 2 ? 860 : 830;
+
+    // Shadow
+    ctx.fillStyle = '#13140d';
+    ctx.fillRect(titleBadgeX + 4, titleBadgeY + 4, titleBadgeW, titleBadgeH);
+    // Badge
+    ctx.fillStyle = '#ff4a8e';
+    ctx.fillRect(titleBadgeX, titleBadgeY, titleBadgeW, titleBadgeH);
+    ctx.strokeStyle = '#13140d';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(titleBadgeX, titleBadgeY, titleBadgeW, titleBadgeH);
+    // Text
+    ctx.fillStyle = '#13140d';
+    ctx.font = '700 18px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(titleText, W / 2, titleBadgeY + titleBadgeH / 2);
+
+    // ---- Decorative wave separator ----
+    const waveY = Math.max(titleBadgeY + titleBadgeH + 60, 960);
+    ctx.strokeStyle = 'rgba(141, 214, 163, 0.2)';
+    ctx.lineWidth = 1.5;
+    ctx.beginPath();
+    for (let x = frame + 36; x < W - frame - 36; x += 3) {
+      const y = waveY + Math.sin(x * 0.04) * 8;
+      if (x === frame + 36) ctx.moveTo(x, y);
+      else ctx.lineTo(x, y);
+    }
+    ctx.stroke();
+
+    // ---- Date / Location Block ----
+    const infoY = waveY + 40;
+    ctx.fillStyle = '#13140d';
+    const dateBlockW = 180;
+    const dateBlockH = 80;
+
+    // "JAN 2026" block
+    ctx.fillRect(frame + 60 + 4, infoY + 4, dateBlockW, dateBlockH);
+    ctx.fillStyle = '#d8ca00';
+    ctx.fillRect(frame + 60, infoY, dateBlockW, dateBlockH);
+    ctx.strokeStyle = '#13140d';
+    ctx.lineWidth = 2;
+    ctx.strokeRect(frame + 60, infoY, dateBlockW, dateBlockH);
+    ctx.fillStyle = '#13140d';
+    ctx.font = '700 14px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('JAN 2026', frame + 60 + dateBlockW / 2, infoY + 28);
+    ctx.font = '400 12px "JetBrains Mono", monospace';
+    ctx.fillText('GOA, INDIA', frame + 60 + dateBlockW / 2, infoY + 54);
+
+    // "HACKER HOUSE" block
+    ctx.fillStyle = '#13140d';
+    ctx.fillRect(frame + 260 + 4, infoY + 4, 220, dateBlockH);
+    ctx.fillStyle = '#8dd6a3';
+    ctx.fillRect(frame + 260, infoY, 220, dateBlockH);
+    ctx.strokeStyle = '#13140d';
+    ctx.strokeRect(frame + 260, infoY, 220, dateBlockH);
+    ctx.fillStyle = '#13140d';
+    ctx.font = '700 14px "JetBrains Mono", monospace';
+    ctx.textAlign = 'center';
+    ctx.fillText('HACKER HOUSE', frame + 260 + 110, infoY + 28);
+    ctx.font = '400 12px "JetBrains Mono", monospace';
+    ctx.fillText('BUILD × SHIP', frame + 260 + 110, infoY + 54);
+
+    // ---- Footer Section ----
+    const footerY = H - frame - 120;
+
+    // Separator line
+    ctx.strokeStyle = '#404941';
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(frame + 36, footerY);
+    ctx.lineTo(W - frame - 36, footerY);
+    ctx.stroke();
+
+    // ID hash
+    const hashId = '0x' + generateHexId();
+    ctx.fillStyle = '#e4e3d6';
+    ctx.font = '500 16px "JetBrains Mono", monospace';
+    ctx.textAlign = 'left';
+    ctx.textBaseline = 'top';
+    ctx.fillText('ID: ' + hashId, frame + 36, footerY + 24);
+
+    // Hashtag
+    ctx.fillStyle = '#8dd6a3';
+    ctx.font = '700 18px "JetBrains Mono", monospace';
+    ctx.fillText('#FrameInGoa', frame + 36, footerY + 56);
+
+    // Decorative barcode
+    const barcodeX = W - frame - 160;
+    const barcodeY2 = footerY + 20;
+    const barHeights = [60, 60, 45, 60, 60, 30, 60, 60];
+    const barWidths = [6, 12, 6, 3, 16, 6, 12, 2];
+    const barColors = ['#8dd6a3', '#e4e3d6', '#e4e3d6', '#ff4a8e', '#e4e3d6', '#e4e3d6', '#d8ca00', '#e4e3d6'];
+    let bx = barcodeX;
+    barHeights.forEach((h, i) => {
+      ctx.fillStyle = barColors[i];
+      ctx.fillRect(bx, barcodeY2 + (60 - h), barWidths[i], h);
+      bx += barWidths[i] + 4;
+    });
+
+    // ---- Noise grain ----
+    addNoiseGrain(W, H, 0.025);
+
+    // ---- Save as blob ----
+    canvas.toBlob((blob) => {
+      state.generatedBlob = blob;
+    }, 'image/png');
+  }
+
+  // ----- Helper: Center-crop draw -----
+  function drawCenterCrop(img, dx, dy, dw, dh) {
+    const imgW = img.naturalWidth;
+    const imgH = img.naturalHeight;
+    const imgAspect = imgW / imgH;
+    const destAspect = dw / dh;
+
+    let sx, sy, sw, sh;
+    if (imgAspect > destAspect) {
+      // Wider than needed — crop sides
+      sh = imgH;
+      sw = imgH * destAspect;
+      sx = (imgW - sw) / 2;
+      sy = 0;
+    } else {
+      // Taller than needed — crop top/bottom
+      sw = imgW;
+      sh = imgW / destAspect;
+      sx = 0;
+      sy = (imgH - sh) / 2;
+    }
+    ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+  }
+
+  // ----- Helper: Noise grain -----
+  function addNoiseGrain(w, h, opacity) {
+    const imageData = ctx.getImageData(0, 0, w, h);
+    const data = imageData.data;
+    const strength = opacity * 255;
+    for (let i = 0; i < data.length; i += 4) {
+      const noise = (Math.random() - 0.5) * strength;
+      data[i] = Math.min(255, Math.max(0, data[i] + noise));
+      data[i + 1] = Math.min(255, Math.max(0, data[i + 1] + noise));
+      data[i + 2] = Math.min(255, Math.max(0, data[i + 2] + noise));
+    }
+    ctx.putImageData(imageData, 0, 0);
+  }
+
+  // ----- Helper: Random hex ID -----
+  function generateHexId() {
+    const chars = '0123456789ABCDEF';
+    let id = '';
+    for (let i = 0; i < 4; i++) id += chars[Math.floor(Math.random() * 16)];
+    id += '...';
+    for (let i = 0; i < 3; i++) id += chars[Math.floor(Math.random() * 16)];
+    return id;
+  }
+
+  // ----- Download -----
+  $('#btnDownload').addEventListener('click', () => {
+    if (!state.generatedBlob) {
+      showToast('Image not ready yet. Please wait a moment.');
+      return;
+    }
+    const url = URL.createObjectURL(state.generatedBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = state.format === 'pfp'
+      ? 'HH-Goa-2026-PFP.png'
+      : `HH-Goa-2026-${(state.name || 'Builder').replace(/\s+/g, '-')}.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  });
+
+  // ----- Share to X -----
+  function shareToX() {
+    if (!state.generatedBlob) {
+      showToast('Image not ready yet. Please wait a moment.');
+      return;
+    }
+    // First trigger download so user has the image
+    const url = URL.createObjectURL(state.generatedBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = state.format === 'pfp'
+      ? 'HH-Goa-2026-PFP.png'
+      : `HH-Goa-2026-${(state.name || 'Builder').replace(/\s+/g, '-')}.png`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    // Then open X intent
+    const caption = state.format === 'pfp'
+      ? 'Just framed my builder era 🔥🌴 See you at HH Goa 2026!'
+      : `${state.name || 'Builder'} × ${state.builderTitle || 'Builder'} 🔥🌴 Ready for HH Goa 2026!`;
+
+    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&hashtags=${encodeURIComponent('FrameInGoa,HHGoa2026')}`;
+
+    setTimeout(() => {
+      window.open(tweetUrl, '_blank', 'noopener,noreferrer');
+    }, 300);
+
+    showToast('Image downloaded! Attach it to your tweet on X.');
+  }
+
+  $('#btnShare').addEventListener('click', shareToX);
+  $('#navShare').addEventListener('click', shareToX);
+
+  // ----- Start Over -----
+  $('#btnStartOver').addEventListener('click', () => {
+    // Reset state
+    state.photoFile = null;
+    state.photoBlob = null;
+    state.photoImg = null;
+    state.name = '';
+    state.role = '';
+    state.generatedBlob = null;
+    fileInput.value = '';
+    $('#inputName').value = '';
+    $('#inputRole').value = '';
+    showScreen('landing');
+  });
+
+  // ----- Initialize -----
+  state.builderTitle = randomTitle();
+
+})();
+</script>
+
+</body>
+</html>
