@@ -1304,32 +1304,32 @@ body {
     const img = state.photoImg;
 
     // ---- Background ----
-    ctx.fillStyle = '#1f2018';
+    ctx.fillStyle = '#0d5c34'; // Vibrant jungle green
     ctx.fillRect(0, 0, W, H);
 
-    // Geometric pattern overlay
-    ctx.strokeStyle = 'rgba(141, 214, 163, 0.04)';
-    ctx.lineWidth = 1;
-    for (let i = 0; i < W; i += 80) {
-      for (let j = 0; j < H; j += 140) {
-        // Diamond pattern
-        ctx.beginPath();
-        ctx.moveTo(i + 40, j);
-        ctx.lineTo(i + 80, j + 70);
-        ctx.lineTo(i + 40, j + 140);
-        ctx.lineTo(i, j + 70);
-        ctx.closePath();
-        ctx.stroke();
-      }
-    }
-
-    // Radial gradient overlay
-    const grd = ctx.createRadialGradient(W / 2, H * 0.35, 0, W / 2, H * 0.35, W * 0.7);
-    grd.addColorStop(0, 'rgba(13, 92, 52, 0.15)');
-    grd.addColorStop(0.5, 'rgba(13, 92, 52, 0.05)');
-    grd.addColorStop(1, 'transparent');
+    // Subtle radial gradient to focus center
+    const grd = ctx.createRadialGradient(W / 2, H * 0.35, 0, W / 2, H * 0.35, W * 0.8);
+    grd.addColorStop(0, 'rgba(0, 0, 0, 0)');
+    grd.addColorStop(1, 'rgba(0, 0, 0, 0.3)');
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, W, H);
+
+    // Huge Typography Background (HACKER HOUSE + गोवा)
+    // Draw "HACKER HOUSE"
+    ctx.fillStyle = 'rgba(216, 202, 0, 0.15)'; // Yellow, low opacity to act as watermark
+    ctx.font = '700 320px "Bodoni Moda", serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.save();
+    ctx.scale(0.8, 1); // Condense the font slightly
+    ctx.fillText('HACKER', (W / 2) / 0.8, 480);
+    ctx.fillText('HOUSE', (W / 2) / 0.8, 760);
+    ctx.restore();
+
+    // Draw "गोवा" (Goa in Hindi/Marathi) overlapping
+    ctx.fillStyle = 'rgba(255, 74, 142, 0.25)'; // Pink, slightly higher opacity
+    ctx.font = '900 240px "Fira Sans", sans-serif'; 
+    ctx.fillText('गोवा', W / 2, 620);
 
     // ---- Inner frame (12px) ----
     const frame = 24;
@@ -1338,41 +1338,44 @@ body {
     ctx.strokeRect(frame, frame, W - frame * 2, H - frame * 2);
 
     // ---- Top Header ----
-    // HH GOA title
-    ctx.fillStyle = '#8dd6a3';
-    ctx.font = '700 72px "Bodoni Moda", serif';
+    // 247PM.STUDIO / HHGOA.COM header
+    ctx.fillStyle = '#d8ca00';
+    ctx.font = '700 24px "JetBrains Mono", monospace';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'top';
-    ctx.fillText('HH GOA', frame + 36, frame + 36);
+    ctx.fillText('247PM.STUDIO', frame + 36, frame + 36);
 
-    // 2026 EVENT ID badge
+    ctx.textAlign = 'right';
+    ctx.fillText('HHGOA.COM', W - frame - 36, frame + 36);
+
+    // 2026 EVENT ID badge (Moved down and restyled)
     ctx.fillStyle = '#13140d';
-    ctx.fillRect(frame + 36, frame + 120, 220, 36);
+    ctx.fillRect(frame + 36, frame + 80, 220, 36);
     ctx.strokeStyle = '#404941';
     ctx.lineWidth = 1;
-    ctx.strokeRect(frame + 36, frame + 120, 220, 36);
+    ctx.strokeRect(frame + 36, frame + 80, 220, 36);
     ctx.fillStyle = '#e4e3d6';
     ctx.font = '500 16px "JetBrains Mono", monospace';
     ctx.textAlign = 'left';
     ctx.textBaseline = 'middle';
-    ctx.fillText('2026 EVENT ID', frame + 52, frame + 138);
+    ctx.fillText('2026 EVENT ID', frame + 52, frame + 98);
 
     // Fire icon (drawn as stylized flame)
-    const fireX = W - frame - 80;
-    const fireY = frame + 52;
+    const fireX = frame + 280;
+    const fireY = frame + 90;
     ctx.fillStyle = '#ff4a8e';
     ctx.beginPath();
-    ctx.moveTo(fireX, fireY + 40);
-    ctx.quadraticCurveTo(fireX - 20, fireY + 15, fireX, fireY - 10);
-    ctx.quadraticCurveTo(fireX + 5, fireY + 10, fireX + 12, fireY - 5);
-    ctx.quadraticCurveTo(fireX + 25, fireY + 20, fireX, fireY + 40);
+    ctx.moveTo(fireX, fireY + 20);
+    ctx.quadraticCurveTo(fireX - 10, fireY + 7, fireX, fireY - 5);
+    ctx.quadraticCurveTo(fireX + 2, fireY + 5, fireX + 6, fireY - 2);
+    ctx.quadraticCurveTo(fireX + 12, fireY + 10, fireX, fireY + 20);
     ctx.fill();
     // Inner flame
     ctx.fillStyle = '#d8ca00';
     ctx.beginPath();
-    ctx.moveTo(fireX, fireY + 38);
-    ctx.quadraticCurveTo(fireX - 8, fireY + 25, fireX, fireY + 12);
-    ctx.quadraticCurveTo(fireX + 8, fireY + 25, fireX, fireY + 38);
+    ctx.moveTo(fireX, fireY + 19);
+    ctx.quadraticCurveTo(fireX - 4, fireY + 12, fireX, fireY + 6);
+    ctx.quadraticCurveTo(fireX + 4, fireY + 12, fireX, fireY + 19);
     ctx.fill();
 
     // ---- Profile Photo Section ----
@@ -1508,7 +1511,7 @@ body {
     const dateBlockW = 180;
     const dateBlockH = 80;
 
-    // "JAN 2026" block
+    // "OCT 2026" block
     ctx.fillRect(frame + 60 + 4, infoY + 4, dateBlockW, dateBlockH);
     ctx.fillStyle = '#d8ca00';
     ctx.fillRect(frame + 60, infoY, dateBlockW, dateBlockH);
@@ -1516,14 +1519,14 @@ body {
     ctx.lineWidth = 2;
     ctx.strokeRect(frame + 60, infoY, dateBlockW, dateBlockH);
     ctx.fillStyle = '#13140d';
-    ctx.font = '700 14px "JetBrains Mono", monospace';
+    ctx.font = '700 16px "JetBrains Mono", monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('JAN 2026', frame + 60 + dateBlockW / 2, infoY + 28);
+    ctx.fillText('28-31 OCT', frame + 60 + dateBlockW / 2, infoY + 28);
     ctx.font = '400 12px "JetBrains Mono", monospace';
     ctx.fillText('GOA, INDIA', frame + 60 + dateBlockW / 2, infoY + 54);
 
-    // "HACKER HOUSE" block
+    // "2:47PM STUDIO" block
     ctx.fillStyle = '#13140d';
     ctx.fillRect(frame + 260 + 4, infoY + 4, 220, dateBlockH);
     ctx.fillStyle = '#8dd6a3';
@@ -1531,11 +1534,11 @@ body {
     ctx.strokeStyle = '#13140d';
     ctx.strokeRect(frame + 260, infoY, 220, dateBlockH);
     ctx.fillStyle = '#13140d';
-    ctx.font = '700 14px "JetBrains Mono", monospace';
+    ctx.font = '700 16px "JetBrains Mono", monospace';
     ctx.textAlign = 'center';
-    ctx.fillText('HACKER HOUSE', frame + 260 + 110, infoY + 28);
+    ctx.fillText('2:47PM STUDIO', frame + 260 + 110, infoY + 28);
     ctx.font = '400 12px "JetBrains Mono", monospace';
-    ctx.fillText('BUILD × SHIP', frame + 260 + 110, infoY + 54);
+    ctx.fillText('HACKER HOUSE', frame + 260 + 110, infoY + 54);
 
     // ---- Footer Section ----
     const footerY = H - frame - 120;
