@@ -683,10 +683,10 @@ body {
   animation: shimmer 1.5s infinite;
 }
 
-/* Error toast */
+/* Toast notifications */
 .toast {
   position: fixed;
-  top: 5rem; left: 50%;
+  top: 5rem; left: 50%; right: auto;
   transform: translateX(-50%);
   background: var(--surface-container-high);
   color: var(--error);
@@ -697,8 +697,45 @@ body {
   z-index: 200;
   display: none;
   animation: fadeSlideIn 0.3s ease-out;
+  max-width: 90vw;
+  text-align: center;
 }
 .toast.show { display: block; }
+.toast.toast--success {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+
+/* Share hint banner */
+.share-hint {
+  width: 100%; max-width: 480px;
+  background: var(--surface-container);
+  border: 1px solid var(--outline-variant);
+  padding: 1rem 1.25rem;
+  display: flex; align-items: flex-start; gap: 0.75rem;
+}
+.share-hint__icon {
+  color: var(--tertiary);
+  font-size: 1.25rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.share-hint__text {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: var(--on-surface-variant);
+  line-height: 1.5;
+}
+.share-hint__text strong {
+  color: var(--on-surface);
+  font-weight: 600;
+}
+.share-hint__text .tag {
+  color: var(--primary);
+  font-family: var(--font-code);
+  font-size: 0.8rem;
+  font-weight: 600;
+}
 </style>
 </head>
 <body>
@@ -846,6 +883,15 @@ body {
         Share to X
       </button>
     </div>
+
+    <div class="share-hint" id="shareHint">
+      <span class="material-symbols-outlined share-hint__icon">info</span>
+      <div class="share-hint__text" id="shareHintText">
+        <strong>Sharing on mobile?</strong> Tap "Share to X" to directly share the image with your caption.
+        <br>On desktop, the image will download first — attach it to your tweet.
+        <br>Caption includes <span class="tag">#FrameInGoa #HHGoa2026</span>
+      </div>
+    </div>
   </section>
 
 </main>
@@ -983,12 +1029,14 @@ body {
 
   // ----- Toast -----
   let toastTimeout;
-  function showToast(msg) {
+  function showToast(msg, type) {
     const t = $('#toast');
     t.textContent = msg;
+    t.classList.remove('toast--success');
+    if (type === 'success') t.classList.add('toast--success');
     t.classList.add('show');
     clearTimeout(toastTimeout);
-    toastTimeout = setTimeout(() => t.classList.remove('show'), 4000);
+    toastTimeout = setTimeout(() => { t.classList.remove('show', 'toast--success'); }, 4000);
   }
 
   // ----- File Upload -----
@@ -1602,35 +1650,68 @@ body {
   });
 
   // ----- Share to X -----
-  function shareToX() {
+  function getShareCaption() {
+    return state.format === 'pfp'
+      ? 'Just framed my builder era 🔥🌴 See you at HH Goa 2026!'
+      : `${state.name || 'Builder'} × ${state.builderTitle || 'Builder'} 🔥🌴 Ready for HH Goa 2026!`;
+  }
+
+  function getFileName() {
+    return state.format === 'pfp'
+      ? 'HH-Goa-2026-PFP.png'
+      : `HH-Goa-2026-${(state.name || 'Builder').replace(/\s+/g, '-')}.png`;
+  }
+
+  async function shareToX() {
     if (!state.generatedBlob) {
       showToast('Image not ready yet. Please wait a moment.');
       return;
     }
-    // First trigger download so user has the image
+
+    const caption = getShareCaption();
+    const fullCaption = caption + ' #FrameInGoa #HHGoa2026';
+    const fileName = getFileName();
+
+    // Try Web Share API first (works on mobile — shares file directly)
+    if (navigator.share && navigator.canShare) {
+      try {
+        const file = new File([state.generatedBlob], fileName, { type: 'image/png' });
+        const shareData = {
+          text: fullCaption,
+          files: [file],
+        };
+
+        if (navigator.canShare(shareData)) {
+          await navigator.share(shareData);
+          showToast('Shared successfully! 🔥', 'success');
+          return;
+        }
+      } catch (err) {
+        // User cancelled or share failed — fall through to desktop flow
+        if (err.name === 'AbortError') return; // user cancelled, do nothing
+        console.warn('Web Share API failed, falling back:', err);
+      }
+    }
+
+    // Desktop fallback: download image + open tweet intent
+    // 1. Download the image
     const url = URL.createObjectURL(state.generatedBlob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = state.format === 'pfp'
-      ? 'HH-Goa-2026-PFP.png'
-      : `HH-Goa-2026-${(state.name || 'Builder').replace(/\s+/g, '-')}.png`;
+    a.download = fileName;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    // Then open X intent
-    const caption = state.format === 'pfp'
-      ? 'Just framed my builder era 🔥🌴 See you at HH Goa 2026!'
-      : `${state.name || 'Builder'} × ${state.builderTitle || 'Builder'} 🔥🌴 Ready for HH Goa 2026!`;
-
+    // 2. Open X tweet intent with pre-filled text
     const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&hashtags=${encodeURIComponent('FrameInGoa,HHGoa2026')}`;
 
     setTimeout(() => {
       window.open(tweetUrl, '_blank', 'noopener,noreferrer');
-    }, 300);
+    }, 500);
 
-    showToast('Image downloaded! Attach it to your tweet on X.');
+    showToast('Image saved! Attach it to your tweet on X.', 'success');
   }
 
   $('#btnShare').addEventListener('click', shareToX);
@@ -1653,6 +1734,27 @@ body {
 
   // ----- Initialize -----
   state.builderTitle = randomTitle();
+
+  // Detect Web Share API support and update hint
+  (function updateShareHint() {
+    const hint = $('#shareHintText');
+    if (!hint) return;
+    const canShareFiles = navigator.share && navigator.canShare;
+    if (canShareFiles) {
+      // Test if file sharing is actually supported
+      try {
+        const testFile = new File([''], 'test.png', { type: 'image/png' });
+        const testData = { files: [testFile] };
+        if (navigator.canShare(testData)) {
+          hint.innerHTML = '<strong>Tap "Share to X"</strong> to share your graphic directly with the image attached and caption pre-filled.' +
+            '<br>Caption includes <span class="tag">#FrameInGoa #HHGoa2026</span>';
+          return;
+        }
+      } catch (e) { /* fall through */ }
+    }
+    hint.innerHTML = '<strong>How to share:</strong> Click "Share to X" — your image will download, then X opens with a pre-filled caption. Attach the saved image to your tweet.' +
+      '<br>Caption includes <span class="tag">#FrameInGoa #HHGoa2026</span>';
+  })();
 
 })();
 </script>
