@@ -1320,8 +1320,10 @@ body {
     ctx.font = '700 280px "Bodoni Moda", serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('HACKER', W / 2, 480);
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '8px';
+    ctx.fillText('HAC\u200cKER', W / 2, 480);
     ctx.fillText('HOUSE', W / 2, 760);
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
 
     // Draw "गोवा" (Goa in Hindi/Marathi) overlapping
     ctx.fillStyle = 'rgba(255, 74, 142, 0.25)'; // Pink, slightly higher opacity
