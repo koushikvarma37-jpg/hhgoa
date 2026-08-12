@@ -1386,37 +1386,6 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, W, H);
 
-    // Huge Typography Background (HACKER HOUSE + गोवा)
-    // Draw each letter individually to avoid ligature merging
-    ctx.fillStyle = 'rgba(216, 202, 0, 0.15)'; // Yellow, low opacity watermark
-    ctx.font = '700 280px "Bodoni Moda", serif';
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    // Helper: draw text letter-by-letter with explicit spacing
-    function drawSpacedText(text, centerX, y, spacing) {
-      const letters = text.split('');
-      // Measure total width
-      let totalW = 0;
-      const widths = letters.map(ch => { const w = ctx.measureText(ch).width; totalW += w; return w; });
-      totalW += spacing * (letters.length - 1);
-      let x = centerX - totalW / 2;
-      for (let i = 0; i < letters.length; i++) {
-        ctx.textAlign = 'left';
-        ctx.fillText(letters[i], x, y);
-        x += widths[i] + spacing;
-      }
-      ctx.textAlign = 'center'; // restore
-    }
-
-    drawSpacedText('HACKER', W / 2, 480, 12);
-    drawSpacedText('HOUSE', W / 2, 760, 12);
-
-    // Draw "गोवा" (Goa in Hindi/Marathi) overlapping
-    ctx.fillStyle = 'rgba(255, 74, 142, 0.25)'; // Pink, slightly higher opacity
-    ctx.font = '900 240px "Fira Sans", sans-serif'; 
-    ctx.fillText('गोवा', W / 2, 620);
-
     // ---- Inner frame (12px) ----
     const frame = 24;
     ctx.strokeStyle = '#404941';
