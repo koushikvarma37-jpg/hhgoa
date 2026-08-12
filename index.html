@@ -1387,15 +1387,30 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     ctx.fillRect(0, 0, W, H);
 
     // Huge Typography Background (HACKER HOUSE + गोवा)
-    // Draw "HACKER HOUSE"
-    ctx.fillStyle = 'rgba(216, 202, 0, 0.15)'; // Yellow, low opacity to act as watermark
+    // Draw each letter individually to avoid ligature merging
+    ctx.fillStyle = 'rgba(216, 202, 0, 0.15)'; // Yellow, low opacity watermark
     ctx.font = '700 280px "Bodoni Moda", serif';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    if ('letterSpacing' in ctx) ctx.letterSpacing = '8px';
-    ctx.fillText('HAC\u200cKER', W / 2, 480);
-    ctx.fillText('HOUSE', W / 2, 760);
-    if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+
+    // Helper: draw text letter-by-letter with explicit spacing
+    function drawSpacedText(text, centerX, y, spacing) {
+      const letters = text.split('');
+      // Measure total width
+      let totalW = 0;
+      const widths = letters.map(ch => { const w = ctx.measureText(ch).width; totalW += w; return w; });
+      totalW += spacing * (letters.length - 1);
+      let x = centerX - totalW / 2;
+      for (let i = 0; i < letters.length; i++) {
+        ctx.textAlign = 'left';
+        ctx.fillText(letters[i], x, y);
+        x += widths[i] + spacing;
+      }
+      ctx.textAlign = 'center'; // restore
+    }
+
+    drawSpacedText('HACKER', W / 2, 480, 12);
+    drawSpacedText('HOUSE', W / 2, 760, 12);
 
     // Draw "गोवा" (Goa in Hindi/Marathi) overlapping
     ctx.fillStyle = 'rgba(255, 74, 142, 0.25)'; // Pink, slightly higher opacity
@@ -1449,44 +1464,35 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     ctx.quadraticCurveTo(fireX + 4, fireY + 12, fireX, fireY + 19);
     ctx.fill();
 
-    // ---- Profile Photo Section ----
-    const photoRadius = 180;
+    // ---- Profile Photo Section (Square) ----
+    const photoSize = 400; // width & height of the square photo
     const photoCX = W / 2;
-    const photoCY = 450;
+    const photoCY = 460;
+    const photoX = photoCX - photoSize / 2;
+    const photoY = photoCY - photoSize / 2;
 
-    // Dashed neon pink outer ring
+    // Dashed neon pink outer border (rotated diamond feel)
     ctx.strokeStyle = '#ff4a8e';
     ctx.lineWidth = 2.5;
     ctx.setLineDash([8, 6]);
-    ctx.beginPath();
-    ctx.arc(photoCX, photoCY, photoRadius + 16, 0, Math.PI * 2);
-    ctx.stroke();
+    ctx.strokeRect(photoX - 16, photoY - 16, photoSize + 32, photoSize + 32);
     ctx.setLineDash([]);
 
     // Solid primary border
     ctx.strokeStyle = '#8dd6a3';
     ctx.lineWidth = 5;
-    ctx.beginPath();
-    ctx.arc(photoCX, photoCY, photoRadius + 3, 0, Math.PI * 2);
-    ctx.stroke();
-
-    // Clip and draw circular photo
-    ctx.save();
-    ctx.beginPath();
-    ctx.arc(photoCX, photoCY, photoRadius, 0, Math.PI * 2);
-    ctx.clip();
+    ctx.strokeRect(photoX - 3, photoY - 3, photoSize + 6, photoSize + 6);
 
     // Background for photo area
     ctx.fillStyle = '#13140d';
-    ctx.fillRect(photoCX - photoRadius, photoCY - photoRadius, photoRadius * 2, photoRadius * 2);
+    ctx.fillRect(photoX, photoY, photoSize, photoSize);
 
-    // Draw photo center-cropped into circle
+    // Draw photo center-cropped into square
     const srcSize = Math.min(img.naturalWidth, img.naturalHeight);
     const sx = (img.naturalWidth - srcSize) / 2;
     const sy = (img.naturalHeight - srcSize) / 2;
     ctx.drawImage(img, sx, sy, srcSize, srcSize,
-      photoCX - photoRadius, photoCY - photoRadius, photoRadius * 2, photoRadius * 2);
-    ctx.restore();
+      photoX, photoY, photoSize, photoSize);
 
     // ---- Role Badge (Yellow) ----
     const roleText = (state.role || 'Builder').toUpperCase();
