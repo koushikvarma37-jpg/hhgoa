@@ -1434,9 +1434,9 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     ctx.fill();
 
     // ---- Profile Photo Section (Square) ----
-    const photoSize = 400; // width & height of the square photo
+    const photoSize = 500; // width & height of the square photo
     const photoCX = W / 2;
-    const photoCY = 460;
+    const photoCY = 490;
     const photoX = photoCX - photoSize / 2;
     const photoY = photoCY - photoSize / 2;
 
@@ -1470,7 +1470,7 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     const roleBadgeW = roleMetrics.width + 48;
     const roleBadgeH = 48;
     const roleBadgeX = (W - roleBadgeW) / 2;
-    const roleBadgeY = 690;
+    const roleBadgeY = 780;
 
     // Shadow
     ctx.fillStyle = '#13140d';
@@ -1507,11 +1507,11 @@ body.result-mode.pfp-mode .star-bg { display: block; }
       const line1 = nameParts.slice(0, Math.ceil(nameParts.length / 2)).join(' ');
       const line2 = nameParts.slice(Math.ceil(nameParts.length / 2)).join(' ');
       const lineH = nameFontSize * 1.05;
-      const nameBaseY = 810;
+      const nameBaseY = 900;
       ctx.fillText(line1, W / 2, nameBaseY);
       ctx.fillText(line2, W / 2, nameBaseY + lineH);
     } else {
-      ctx.fillText(nameText, W / 2, 830);
+      ctx.fillText(nameText, W / 2, 920);
     }
 
     // ---- Builder Title Badge (Pink) ----
@@ -1521,7 +1521,7 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     const titleBadgeW = titleMetrics.width + 48;
     const titleBadgeH = 44;
     const titleBadgeX = (W - titleBadgeW) / 2;
-    const titleBadgeY = nameParts.length >= 2 ? 930 : 900;
+    const titleBadgeY = nameParts.length >= 2 ? 1020 : 990;
 
     // Shadow
     ctx.fillStyle = '#13140d';
