@@ -1434,9 +1434,9 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     ctx.fill();
 
     // ---- Profile Photo Section (Square) ----
-    const photoSize = 500; // width & height of the square photo
+    const photoSize = 600; // width & height of the square photo
     const photoCX = W / 2;
-    const photoCY = 490;
+    const photoCY = 530;
     const photoX = photoCX - photoSize / 2;
     const photoY = photoCY - photoSize / 2;
 
@@ -1465,12 +1465,12 @@ body.result-mode.pfp-mode .star-bg { display: block; }
 
     // ---- Role Badge (Yellow) ----
     const roleText = (state.role || 'Builder').toUpperCase();
-    ctx.font = '700 22px "JetBrains Mono", monospace';
+    ctx.font = '700 28px "JetBrains Mono", monospace';
     const roleMetrics = ctx.measureText(roleText);
-    const roleBadgeW = roleMetrics.width + 48;
-    const roleBadgeH = 48;
+    const roleBadgeW = roleMetrics.width + 56;
+    const roleBadgeH = 54;
     const roleBadgeX = (W - roleBadgeW) / 2;
-    const roleBadgeY = 780;
+    const roleBadgeY = 870;
 
     // Shadow
     ctx.fillStyle = '#13140d';
@@ -1483,7 +1483,7 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     ctx.strokeRect(roleBadgeX, roleBadgeY, roleBadgeW, roleBadgeH);
     // Text
     ctx.fillStyle = '#13140d';
-    ctx.font = '700 20px "JetBrains Mono", monospace';
+    ctx.font = '700 26px "JetBrains Mono", monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(roleText, W / 2, roleBadgeY + roleBadgeH / 2);
@@ -1507,21 +1507,21 @@ body.result-mode.pfp-mode .star-bg { display: block; }
       const line1 = nameParts.slice(0, Math.ceil(nameParts.length / 2)).join(' ');
       const line2 = nameParts.slice(Math.ceil(nameParts.length / 2)).join(' ');
       const lineH = nameFontSize * 1.05;
-      const nameBaseY = 900;
+      const nameBaseY = 1000;
       ctx.fillText(line1, W / 2, nameBaseY);
       ctx.fillText(line2, W / 2, nameBaseY + lineH);
     } else {
-      ctx.fillText(nameText, W / 2, 920);
+      ctx.fillText(nameText, W / 2, 1020);
     }
 
     // ---- Builder Title Badge (Pink) ----
     const titleText = (state.builderTitle || 'The Builder').toUpperCase();
-    ctx.font = '700 20px "JetBrains Mono", monospace';
+    ctx.font = '700 26px "JetBrains Mono", monospace';
     const titleMetrics = ctx.measureText(titleText);
-    const titleBadgeW = titleMetrics.width + 48;
-    const titleBadgeH = 44;
+    const titleBadgeW = titleMetrics.width + 56;
+    const titleBadgeH = 50;
     const titleBadgeX = (W - titleBadgeW) / 2;
-    const titleBadgeY = nameParts.length >= 2 ? 1020 : 990;
+    const titleBadgeY = nameParts.length >= 2 ? 1120 : 1090;
 
     // Shadow
     ctx.fillStyle = '#13140d';
@@ -1534,7 +1534,7 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     ctx.strokeRect(titleBadgeX, titleBadgeY, titleBadgeW, titleBadgeH);
     // Text
     ctx.fillStyle = '#13140d';
-    ctx.font = '700 18px "JetBrains Mono", monospace';
+    ctx.font = '700 24px "JetBrains Mono", monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
     ctx.fillText(titleText, W / 2, titleBadgeY + titleBadgeH / 2);
