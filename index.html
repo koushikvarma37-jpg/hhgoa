@@ -1251,6 +1251,44 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     }, 1800);
   }
 
+  // ----- Canvas: Helper Drawings -----
+  function drawPalmTree(ctx, x, y, scale, color, flip = false) {
+    ctx.save();
+    ctx.translate(x, y);
+    if (flip) ctx.scale(-scale, scale);
+    else ctx.scale(scale, scale);
+    ctx.fillStyle = color;
+
+    // Trunk
+    ctx.beginPath();
+    ctx.moveTo(-10, 0);
+    ctx.quadraticCurveTo(-20, -70, -5, -140);
+    ctx.lineTo(10, -140);
+    ctx.quadraticCurveTo(-5, -70, 10, 0);
+    ctx.fill();
+
+    // Leaves
+    ctx.translate(0, -130);
+    const leaves = [
+      { r: -0.4, l: 80, cp1y: -30, cp2y: 20 },
+      { r: -0.1, l: 100, cp1y: -40, cp2y: 20 },
+      { r: 0.3, l: 90, cp1y: -40, cp2y: 20 },
+      { r: 0.7, l: 70, cp1y: -20, cp2y: 10 },
+      { r: -0.8, l: 60, cp1y: -20, cp2y: 10 }
+    ];
+    leaves.forEach(leaf => {
+      ctx.save();
+      ctx.rotate(leaf.r);
+      ctx.beginPath();
+      ctx.moveTo(0, 0);
+      ctx.quadraticCurveTo(leaf.l / 2, leaf.cp1y, leaf.l, 0);
+      ctx.quadraticCurveTo(leaf.l / 2, leaf.cp2y, 0, 0);
+      ctx.fill();
+      ctx.restore();
+    });
+    ctx.restore();
+  }
+
   // ----- Canvas: PFP Frame (1080×1080) -----
   function renderPfpFrame() {
     const W = 1080, H = 1080;
@@ -1297,6 +1335,10 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     ctx.fillRect(borderW - cornerSize / 2, H - borderW * 2.2 - cornerSize / 2, cornerSize, cornerSize);
     // BR
     ctx.fillRect(W - borderW - cornerSize / 2, H - borderW * 2.2 - cornerSize / 2, cornerSize, cornerSize);
+
+    // Goa Motifs (PFP Frame overlay)
+    drawPalmTree(ctx, borderW + 60, H - borderW * 2.2 + 20, 0.7, '#ff4a8e', false); // Bottom Left, pink
+    drawPalmTree(ctx, W - borderW - 60, H - borderW * 2.2 + 20, 0.7, '#d8ca00', true); // Bottom Right, yellow
 
     // Diagonal decorative lines
     ctx.strokeStyle = 'rgba(141, 214, 163, 0.25)';
@@ -1387,12 +1429,22 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     ctx.fillStyle = grd;
     ctx.fillRect(0, 0, W, H);
 
-    // ---- Inner frame (12px) ----
+    // Inner frame (12px) ----
     const frame = 24;
     ctx.strokeStyle = '#404941';
     ctx.lineWidth = 2;
     ctx.strokeRect(frame, frame, W - frame * 2, H - frame * 2);
 
+    // Goa Motifs (Builder ID background)
+    // Giant subtle sun
+    ctx.fillStyle = 'rgba(216, 202, 0, 0.1)';
+    ctx.beginPath();
+    ctx.arc(W / 2, 700, 360, 0, Math.PI * 2);
+    ctx.fill();
+    // Background palm trees
+    drawPalmTree(ctx, 160, 1500, 2.5, 'rgba(13, 92, 52, 0.4)', false);
+    drawPalmTree(ctx, W - 160, 1300, 3.5, 'rgba(13, 92, 52, 0.4)', true);
+    
     // ---- Top Header ----
     // 247PM.STUDIO / HHGOA.COM header
     ctx.fillStyle = '#d8ca00';
