@@ -1713,39 +1713,17 @@ body.result-mode.pfp-mode .star-bg { display: block; }
       : `HH-Goa-2026-${(state.name || 'Builder').replace(/\s+/g, '-')}.png`;
   }
 
-  async function shareToX() {
+  function shareToX() {
     if (!state.generatedBlob) {
       showToast('Image not ready yet. Please wait a moment.');
       return;
     }
 
     const caption = getShareCaption();
-    const fullCaption = caption + ' #FrameInGoa #HHGoa2026';
+    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&hashtags=${encodeURIComponent('FrameInGoa,HHGoa2026')}`;
     const fileName = getFileName();
 
-    // Try Web Share API first (works on mobile — shares file directly)
-    if (navigator.share && navigator.canShare) {
-      try {
-        const file = new File([state.generatedBlob], fileName, { type: 'image/png' });
-        const shareData = {
-          text: fullCaption,
-          files: [file],
-        };
-
-        if (navigator.canShare(shareData)) {
-          await navigator.share(shareData);
-          showToast('Shared successfully! 🔥', 'success');
-          return;
-        }
-      } catch (err) {
-        // User cancelled or share failed — fall through to desktop flow
-        if (err.name === 'AbortError') return; // user cancelled, do nothing
-        console.warn('Web Share API failed, falling back:', err);
-      }
-    }
-
-    // Desktop fallback: download image + open tweet intent
-    // 1. Download the image
+    // 1. Trigger image download synchronously
     const url = URL.createObjectURL(state.generatedBlob);
     const a = document.createElement('a');
     a.href = url;
@@ -1755,12 +1733,8 @@ body.result-mode.pfp-mode .star-bg { display: block; }
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    // 2. Open X tweet intent with pre-filled text
-    const tweetUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(caption)}&hashtags=${encodeURIComponent('FrameInGoa,HHGoa2026')}`;
-
-    setTimeout(() => {
-      window.open(tweetUrl, '_blank', 'noopener,noreferrer');
-    }, 500);
+    // 2. Open X tweet intent directly (synchronously to bypass popup blockers)
+    window.open(tweetUrl, '_blank', 'noopener,noreferrer');
 
     showToast('Image saved! Attach it to your tweet on X.', 'success');
   }
